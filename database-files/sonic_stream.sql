@@ -6,19 +6,12 @@ USE sonic_stream;
 
 CREATE TABLE IF NOT EXISTS listener
 (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY,
     username varchar(255) UNIQUE NOT NULL,
     password varchar(255) NOT NULL,
     date_of_birth DATE NOT NULL,
     location varchar(255) NOT NULL
 );
-
-INSERT INTO listener (username, password, date_of_birth, location) VALUES
-    ('hpotter', 'asdf1234', DATE('2000-01-01'), 'hogwarts');
-INSERT INTO listener (username, password, date_of_birth, location) VALUES
-    ('jraiden', 'jacktheripper', DATE('2000-01-06'), 'america');
-INSERT INTO listener (username, password, date_of_birth, location) VALUES
-    ('wsartorio', 'myrealpassword1234', DATE('2005-02-02'), 'boston');
 
 CREATE TABLE IF NOT EXISTS friends
 (
@@ -32,21 +25,12 @@ CREATE TABLE IF NOT EXISTS friends
         ON UPDATE cascade
 );
 
-INSERT INTO friends (userID, friendID) VALUES (1, 2);
-INSERT INTO friends (userID, friendID) VALUES (2, 3);
-INSERT INTO friends (userID, friendID) VALUES (3,2);
-
 CREATE TABLE IF NOT EXISTS concert
 (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY,
     venue VARCHAR(60),
     event_date DATE
 );
-
-INSERT INTO concert (venue, event_date) VALUES
-    ('fenway', DATE('2024-06-07'));
-INSERT INTO concert (venue, event_date) VALUES
-    ('international space station', DATE('2034-08-11'));
 
 CREATE TABLE IF NOT EXISTS listener_concert
 (
@@ -61,15 +45,10 @@ CREATE TABLE IF NOT EXISTS listener_concert
 
 CREATE TABLE IF NOT EXISTS artist
 (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     bio VARCHAR(2500) NOT NULL
 );
-
-INSERT INTO artist(name, bio) VALUES
-    ('michael jackson', 'HEE HEE');
-INSERT INTO artist(name, bio) VALUES
-    ('bon jovi', 'WOOOOAH LIVING ON A PRAYER');
 
 CREATE TABLE IF NOT EXISTS artist_concert(
     artist_id INT,
@@ -81,9 +60,6 @@ CREATE TABLE IF NOT EXISTS artist_concert(
         ON UPDATE cascade ON DELETE cascade
 );
 
-INSERT INTO artist_concert(artist_id, concert_id) VALUES (1, 1);
-INSERT INTO artist_concert(artist_id, concert_id) VALUES (2, 2);
-
 CREATE TABLE IF NOT EXISTS listener_artist(
     listener_id INT,
     artist_id INT,
@@ -93,11 +69,6 @@ CREATE TABLE IF NOT EXISTS listener_artist(
     CONSTRAINT fk_08 FOREIGN KEY (artist_id) REFERENCES artist(id)
         ON UPDATE cascade ON DELETE cascade
 );
-
-INSERT INTO listener_artist(listener_id, artist_id) VALUES
-    (1, 1);
-INSERT INTO listener_artist(listener_id, artist_id) VALUES
-    (2, 2);
 
 CREATE TABLE IF NOT EXISTS playlist
 (
@@ -112,30 +83,18 @@ CREATE TABLE IF NOT EXISTS playlist
         ON UPDATE cascade
 );
 
-INSERT INTO playlist(listener_id, playlist_number, name, description) VALUES
-    (1, 1, 'spell training', 'for defense against the dark arts');
-INSERT INTO playlist(listener_id, playlist_number, name, description) VALUES
-    (2, 1, 'destroying metal gears', 'RULES OF NATURE');
-INSERT INTO playlist(listener_id, playlist_number, name, description) VALUES
-    (2, 2, 'chill music', 'relaxing vibes');
-
 CREATE TABLE IF NOT EXISTS revenue
 (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY,
     song_payout DECIMAL NOT NULL,
     company_revenue DECIMAL NOT NULL,
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
     updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-INSERT INTO revenue(song_payout, company_revenue) VALUES
-    (10, 100.46);
-INSERT INTO revenue(song_payout, company_revenue) VALUES
-    (20, 100.46);
-
 CREATE TABLE IF NOT EXISTS song
 (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY,
     album VARCHAR(70),
     title VARCHAR(50) NOT NULL,
     genre VARCHAR(50),
@@ -144,11 +103,6 @@ CREATE TABLE IF NOT EXISTS song
     revenue_id INT,
     FOREIGN KEY (revenue_id) REFERENCES revenue(id)
 );
-
-INSERT INTO song(album, title, genre, duration, revenue_id) VALUES
-    ('asdf', 'asd', 'post-apocalyptic egyptian punk rock', TIME('00:03:36'), 1);
-INSERT INTO song(album, title, genre, duration, revenue_id) VALUES
-    ('it has to be this way', 'MGR OST', 'heavy metal', TIME('00:02:56'), 1);
 
 CREATE TABLE IF NOT EXISTS playlist_song(
     listenerID INT,
@@ -160,10 +114,6 @@ CREATE TABLE IF NOT EXISTS playlist_song(
     CONSTRAINT fk_11 FOREIGN KEY (song_id) REFERENCES song(id)
         ON UPDATE cascade ON DELETE cascade
 );
-
-INSERT INTO playlist_song(listenerID, playlist_number, song_id) VALUES (1, 1, 1);
-INSERT INTO playlist_song(listenerID, playlist_number, song_id) VALUES (2, 2, 2);
-INSERT INTO playlist_song(listenerID, playlist_number, song_id) VALUES (2, 1, 1);
 
 CREATE TABLE IF NOT EXISTS review
 (
@@ -179,11 +129,6 @@ CREATE TABLE IF NOT EXISTS review
     foreign key (listener_id) REFERENCES listener(id)
 );
 
-INSERT INTO review(song_id, review_num, listener_id, text) VALUES
-    (1, 1, 3, 'absolute masterpiece');
-INSERT INTO review(song_id, review_num, listener_id, text) VALUES
-    (1, 2, 2, 'id get married with this in the background');
-
 CREATE TABLE IF NOT EXISTS artist_revenue(
     artist_id INT,
     revenue_id INT,
@@ -193,9 +138,6 @@ CREATE TABLE IF NOT EXISTS artist_revenue(
     CONSTRAINT fk_14 FOREIGN KEY (revenue_id) REFERENCES revenue(id)
         ON UPDATE cascade ON DELETE cascade
 );
-
-INSERT INTO artist_revenue(artist_id, revenue_id) VALUES(1, 1);
-INSERT INTO artist_revenue(artist_id, revenue_id) VALUES(2, 2);
 
 CREATE TABLE IF NOT EXISTS artist_song(
     artist_id INT,
@@ -207,11 +149,8 @@ CREATE TABLE IF NOT EXISTS artist_song(
         ON UPDATE cascade ON DELETE cascade
 );
 
-INSERT INTO artist_song(artist_id, song_id) VALUES (1, 1);
-INSERT INTO artist_song(artist_id, song_id) VALUES (1, 2);
-
 CREATE TABLE IF NOT EXISTS advertisement(
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY,
     name VARCHAR(60) UNIQUE NOT NULL,
     company VARCHAR(60) NOT NULL,
     target_location VARCHAR(100),
@@ -220,11 +159,6 @@ CREATE TABLE IF NOT EXISTS advertisement(
     revenue_id INT,
     FOREIGN KEY (revenue_id) REFERENCES revenue(id)
 );
-
-INSERT INTO advertisement(name, company, target_location, target_age, status, revenue_id)
-    VALUES('acquire money', 'umbrella corp', 'mars', '95-102', 'indefinite hiatus', 1);
-INSERT INTO advertisement(name, company, target_location, target_age, status, revenue_id)
-    VALUES('project zebra', 'vought', 'hell', '12-16', 'complete', 2);
 
 CREATE TABLE IF NOT EXISTS listener_song(
     listener_id INT,
@@ -237,9 +171,3 @@ CREATE TABLE IF NOT EXISTS listener_song(
     CONSTRAINT fk_18 FOREIGN KEY (song_id) REFERENCES song(id)
         ON UPDATE cascade ON DELETE cascade
 );
-
-INSERT INTO listener_song(listener_id, song_id, playcount) VALUES
-    (1, 2, 2039485);
-INSERT INTO listener_song(listener_id, song_id, playcount) VALUES
-    (3, 1, 3948504);
-
