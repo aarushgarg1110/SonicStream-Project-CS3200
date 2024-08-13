@@ -1,3 +1,5 @@
+USE sonic_stream;
+
 insert into concert (id, venue, event_date) values (1, 'Dodger Stadium', '3/25/2024');
 insert into concert (id, venue, event_date) values (2, 'Lambeau Field', '5/23/2024');
 insert into concert (id, venue, event_date) values (3, 'Madison Square Garden', '9/27/2023');
