@@ -27,7 +27,28 @@ def serialize_timedelta(td):
 #     the_response.mimetype = 'application/json'
 #     return the_response
 
-# follow a specific artist
+# follow a specific artist - Tyree
+@listeners.route('/listeners/artists', methods=['POST'])
+def follow_artists():
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    listener_id = the_data['listener_id']
+    artist_id = the_data['artist_id']
+    
+    query = '''
+        INSERT INTO listener_artist(listener_id, artist_id)
+        VALUES (
+    '''
+    query += listener_id + ', '
+    query += artist_id + ');'
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return 'Success'
 
 # make a review on a song
 
