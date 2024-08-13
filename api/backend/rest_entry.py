@@ -6,7 +6,6 @@ from flask import Flask
 from backend.db_connection import db
 from backend.customers.customer_routes import customers
 from backend.products.products_routes import products
-from backend.songs.song_routes import songs # remove this soon just an example
 
 from backend.listeners.listeners_routes import listeners
 from backend.artists.artists_routes import artists
@@ -101,10 +100,9 @@ def create_app():
     # and give a url prefix to each
     app.register_blueprint(customers,   url_prefix='/c')
     app.register_blueprint(products,    url_prefix='/p')
-    app.register_blueprint(songs,       url_prefix='/s') # remove this soon
     app.register_blueprint(listeners,   url_prefix='/l')
     app.register_blueprint(artists,     url_prefix='/a')
-    app.register_blueprint(admins,   url_prefix='/ma')
+    app.register_blueprint(admins,     url_prefix='/ma')
 
     # Don't forget to return the app object
     return app
