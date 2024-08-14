@@ -14,7 +14,7 @@ def get_songs_on_mood(keyword):
 
     # Use parameterized query to avoid SQL injection
     query = '''
-        SELECT s.title, s.album, s.genre, s.duration s.release_date
+        SELECT s.title, s.album, s.genre
         FROM song s
         JOIN review r ON s.id = r.song_id
         WHERE r.text LIKE %s
