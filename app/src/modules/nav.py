@@ -9,17 +9,26 @@ def HomeNav():
 def AboutPageNav():
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
 
-#### ------------------------ Examples for Role of pol_strat_advisor ------------------------
-def PolStratAdvHomeNav():
-    st.sidebar.page_link("pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon='👤')
-
-def WorldBankVizNav():
-    st.sidebar.page_link("pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon='🏦')
+#### ------------------------ Role of listener ------------------------
+def ListenerHomeNav():
+    st.sidebar.page_link("pages/00_Listener_Home.py", label="Listener Home", icon='👤')
+    st.sidebar.page_link("pages/01_Song_Finder.py", label="Song Finder", icon='🏦')
+    st.sidebar.page_link("pages/02_Follow_Artist.py", label="Follow An Artist", icon='🏦')
+    st.sidebar.page_link("pages/03_Review_Song.py", label="Review A Song", icon='🏦')
+    st.sidebar.page_link("pages/04_Common_Songs.py", label="Find Common Songs W/ Friends", icon='🏦')
 
 def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon='🗺️')
+    st.sidebar.page_link("pages/02_Map_Demo.py", label="Review A Song", icon='🗺️')
 
-## ------------------------ Examples for Role of usaid_worker ------------------------
+## ------------------------ Role of Artist ------------------------
+
+def ArtistHomeNav():
+    st.sidebar.page_link("pages/10_Artist_Home.py", label="Artist Home", icon='🏦')
+    st.sidebar.page_link("pages/11_Song_Incomes.py", label="Income From Songs", icon='🏦')
+    st.sidebar.page_link("pages/12_Upload_Song.py", label="Upload A Song", icon='🏦')
+    st.sidebar.page_link("pages/13_Popular_Songs.py", label="View Most Popular Songs", icon='🏦')
+    st.sidebar.page_link("pages/14_Promote_Concert.py", label="Promote A Concert", icon='🏦')
+
 def ApiTestNav():
     st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon='🛜')
 
@@ -29,10 +38,14 @@ def PredictionNav():
 def ClassificationNav():
     st.sidebar.page_link("pages/13_Classification.py", label="Classification Demo", icon='🌺')
 
-#### ------------------------ System Admin Role ------------------------
+#### ------------------------ Marketing Admin Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon='🖥️')
-    st.sidebar.page_link("pages/21_ML_Model_Mgmt.py", label='ML Model Management', icon='🏢')
+    st.sidebar.page_link("pages/21_Monitor_Ads.py", label='Monitor All Advertisements', icon='🏢')
+    st.sidebar.page_link("pages/22_Update_Ads.py", label='Update Status of an Ad', icon='🏢')
+    st.sidebar.page_link("pages/23_Company_Revenue.py", label='View Company Revenue', icon='🏢')
+    st.sidebar.page_link("pages/24_Top10_Artists.py", label='Hottest Artists of The Month', icon='🏢')
+    st.sidebar.page_link("pages/25_Ban_User.py", label='Ban A User', icon='🏢')
 
 
 # --------------------------------Links Function -----------------------------------------------
@@ -42,7 +55,7 @@ def SideBarLinks(show_home=False):
     """    
 
     # add a logo to the sidebar always
-    st.sidebar.image("assets/logo.png", width = 150)
+    st.sidebar.image("assets/logo.png", width = 250)
 
     # If there is no logged in user, redirect to the Home (Landing) page
     if 'authenticated' not in st.session_state:
@@ -57,13 +70,13 @@ def SideBarLinks(show_home=False):
     if st.session_state["authenticated"]:
 
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state['role'] == 'pol_strat_advisor':
-            PolStratAdvHomeNav()
-            WorldBankVizNav()
+        if st.session_state['role'] == 'listener':
+            ListenerHomeNav()
             MapDemoNav()
 
         # If the user role is usaid worker, show the Api Testing page
-        if st.session_state['role'] == 'usaid_worker':
+        if st.session_state['role'] == 'artist':
+            ArtistHomeNav()
             PredictionNav()
             ApiTestNav() 
             ClassificationNav()

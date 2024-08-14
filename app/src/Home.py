@@ -49,29 +49,27 @@ if st.button("Act as Sarah, a Music Listener",
     st.session_state['authenticated'] = True
     # we set the role of the current user
     st.session_state['role'] = 'listener'
-    # we add the first name of the user (so it can be displayed on 
+    # we add the name of the user (so it can be displayed on 
     # subsequent pages). 
-    st.session_state['first_name'] = 'Sarah'
+    st.session_state['username'] = 'dmarsh9'
     # finally, we ask streamlit to switch to another page, in this case, the 
     # landing page for this particular user type
     logger.info("Logging in as SonicStream Listener Persona")
-    st.switch_page('pages/00_Pol_Strat_Home.py')
+    st.switch_page('pages/00_Listener_Home.py')
 
 if st.button('Act as Maya, a Local Artist', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'artist'
-    st.session_state['first_name'] = 'Maya'
-    st.switch_page('pages/10_USAID_Worker_Home.py')
+    st.session_state['username'] = 'Maya Thompson'
+    st.switch_page('pages/10_Artist_Home.py')
 
 if st.button('Act as Marketing Administrator', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'MarketingAdmin'
+    st.session_state['username'] = 'Alex'
     st.switch_page('pages/20_Admin_Home.py')
-
-
 
