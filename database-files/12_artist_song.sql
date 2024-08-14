@@ -48,7 +48,7 @@ insert into artist_song (artist_id, song_id) values ('10', '16');
 insert into artist_song (artist_id, song_id) values ('19', '6');
 insert into artist_song (artist_id, song_id) values ('1', '15');
 insert into artist_song (artist_id, song_id) values ('36', '11');
-insert into artist_song (artist_id, song_id) values ('24', '37');
+insert into artist_song (artist_id, song_id) values ('23', '37');
 insert into artist_song (artist_id, song_id) values ('16', '25');
 insert into artist_song (artist_id, song_id) values ('14', '17');
 insert into artist_song (artist_id, song_id) values ('28', '33');
