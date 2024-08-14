@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify, make_response, current_app
 from backend.db_connection import db
-from backend.ml_models.model01 import predict
 
 admins = Blueprint('admins', __name__)
 

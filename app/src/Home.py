@@ -63,6 +63,7 @@ if st.button('Act as Maya, a Local Artist',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'artist'
     st.session_state['username'] = 'Maya Thompson'
+    st.session_state['listener_id'] = 10
     st.switch_page('pages/10_Artist_Home.py')
 
 if st.button('Act as Marketing Administrator', 

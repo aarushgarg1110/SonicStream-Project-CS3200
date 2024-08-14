@@ -12,22 +12,22 @@ def AboutPageNav():
 #### ------------------------ Role of listener ------------------------
 def ListenerHomeNav():
     st.sidebar.page_link("pages/00_Listener_Home.py", label="Listener Home", icon='👤')
-    st.sidebar.page_link("pages/01_Song_Finder.py", label="Song Finder", icon='🏦')
-    st.sidebar.page_link("pages/02_Follow_Artist.py", label="Follow An Artist", icon='🏦')
-    st.sidebar.page_link("pages/03_Review_Song.py", label="Review A Song", icon='🏦')
-    st.sidebar.page_link("pages/04_Common_Songs.py", label="Find Common Songs W/ Friends", icon='🏦')
+    st.sidebar.page_link("pages/01_Song_Finder.py", label="Song Finder", icon='🎶')
+    st.sidebar.page_link("pages/02_Follow_Artist.py", label="Follow An Artist", icon='👩‍🎤')
+    st.sidebar.page_link("pages/03_Review_Song.py", label="Review A Song", icon='✍️')
+    st.sidebar.page_link("pages/04_Common_Songs.py", label="Find Common Songs W/ Friends", icon='🫂')
 
 def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Review A Song", icon='🗺️')
+    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demo", icon='🗺️')
 
 ## ------------------------ Role of Artist ------------------------
 
 def ArtistHomeNav():
-    st.sidebar.page_link("pages/10_Artist_Home.py", label="Artist Home", icon='🏦')
-    st.sidebar.page_link("pages/11_Song_Incomes.py", label="Income From Songs", icon='🏦')
-    st.sidebar.page_link("pages/12_Upload_Song.py", label="Upload A Song", icon='🏦')
-    st.sidebar.page_link("pages/13_Popular_Songs.py", label="View Most Popular Songs", icon='🏦')
-    st.sidebar.page_link("pages/14_Promote_Concert.py", label="Promote A Concert", icon='🏦')
+    st.sidebar.page_link("pages/10_Artist_Home.py", label="Artist Home", icon='👤')
+    st.sidebar.page_link("pages/11_Song_Incomes.py", label="Income From Songs", icon='💸')
+    st.sidebar.page_link("pages/12_Upload_Song.py", label="Upload A Song", icon='🎶')
+    st.sidebar.page_link("pages/13_Popular_Songs.py", label="View Most Popular Songs", icon='🔥')
+    st.sidebar.page_link("pages/14_Promote_Concert.py", label="Promote A Concert", icon='🥁')
 
 def ApiTestNav():
     st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon='🛜')
@@ -41,11 +41,11 @@ def ClassificationNav():
 #### ------------------------ Marketing Admin Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon='🖥️')
-    st.sidebar.page_link("pages/21_Monitor_Ads.py", label='Monitor All Advertisements', icon='🏢')
-    st.sidebar.page_link("pages/22_Update_Ads.py", label='Update Status of an Ad', icon='🏢')
-    st.sidebar.page_link("pages/23_Company_Revenue.py", label='View Company Revenue', icon='🏢')
-    st.sidebar.page_link("pages/24_Top10_Artists.py", label='Hottest Artists of The Month', icon='🏢')
-    st.sidebar.page_link("pages/25_Ban_User.py", label='Ban A User', icon='🏢')
+    st.sidebar.page_link("pages/21_Monitor_Ads.py", label='Monitor All Advertisements', icon='🧑‍💻')
+    st.sidebar.page_link("pages/22_Update_Ads.py", label='Update Status of an Ad', icon='📝')
+    st.sidebar.page_link("pages/23_Company_Revenue.py", label='View Company Revenue', icon='💸')
+    st.sidebar.page_link("pages/24_Top10_Artists.py", label='Hottest Artists of The Month', icon='🔥')
+    st.sidebar.page_link("pages/25_Ban_User.py", label='Ban A User', icon='❌')
 
 
 # --------------------------------Links Function -----------------------------------------------

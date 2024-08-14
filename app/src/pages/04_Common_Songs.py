@@ -13,18 +13,19 @@ from modules.nav import SideBarLinks
 SideBarLinks()
 
 # set the header of the page
-st.header('Find A Song In Common With Your Friend')
+st.header('Find Songs In Common With Your Friend')
 
 # You can access the session state to make a more customized/personalized app experience
 st.write(f"### Hi, {st.session_state['username']}.")
 # Create a text input box for the user to enter the mood
 user_input = st.text_input("Username of friend to check against: ")
+username = st.session_state['username']
 
 # Check if the user has entered something
 if user_input:
     # Replace <keyword> in the API URL with the user's input
     try: 
-        api_url = f'http://web-api:4000/l/listeners/song/{user_input}'
+        api_url = f'http://web-api:4000/l/listeners/songs/{username}/{user_input}'
     except:
         st.write('could not connect to database to find songs!')
 
@@ -32,6 +33,6 @@ if user_input:
     response = requests.get(api_url).json()
         
     # Display the DataFrame in Streamlit
-    st.dataframe(response, column_order=('title', 'album', 'genre'))
+    st.dataframe(response, column_order=('title', 'album', 'name'))
 else:
-    st.write("Please enter a song.")
+    st.write("Please enter friend's username.")
