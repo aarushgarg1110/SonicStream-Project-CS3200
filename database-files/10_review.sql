@@ -1,3 +1,5 @@
+USE sonic_stream;
+
 insert into review (review_num, song_id, listener_id, text, createdAt, updatedAt) values (1, '36', '27', 'Perfect for a relaxing evening', '2023-08-17 02:00:11', '2024-03-02 13:15:21');
 insert into review (review_num, song_id, listener_id, text, createdAt, updatedAt) values (2, '3', '11', 'Masterfully crafted with unforgettable melodies', '2024-06-30 21:14:05', '2024-02-09 09:28:04');
 insert into review (review_num, song_id, listener_id, text, createdAt, updatedAt) values (3, '39', '17', 'Masterfully crafted with unforgettable melodies', '2023-11-09 14:01:23', '2024-06-16 00:54:21');

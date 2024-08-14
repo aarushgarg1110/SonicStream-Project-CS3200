@@ -1,3 +1,5 @@
+USE sonic_stream;
+
 insert into listener_artist (listener_id, artist_id) values ('3', '38');
 insert into listener_artist (listener_id, artist_id) values ('31', '8');
 insert into listener_artist (listener_id, artist_id) values ('14', '5');

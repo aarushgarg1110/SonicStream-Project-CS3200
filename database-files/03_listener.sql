@@ -1,3 +1,5 @@
+USE sonic_stream;
+
 insert into listener (id, username, password, date_of_birth, location) values (1, 'lloader0', 'rA3/vP~ZJ@7~', '2024-2-9', 'Maciejowice');
 insert into listener (id, username, password, date_of_birth, location) values (2, 'lhearle1', 'mM9@*my4', '2024-7-22', 'Shangdu');
 insert into listener (id, username, password, date_of_birth, location) values (3, 'dpoll2', 'fD3!~oElml', '2024-4-27', 'Leudelange');

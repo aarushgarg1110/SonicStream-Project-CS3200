@@ -1,3 +1,5 @@
+USE sonic_stream;
+
 insert into friends (userID, friendID, createdAt) values ('16', '16', '2024-08-02 06:41:07');
 insert into friends (userID, friendID, createdAt) values ('40', '21', '2024-05-24 21:54:01');
 insert into friends (userID, friendID, createdAt) values ('1', '29', '2024-05-31 14:43:08');

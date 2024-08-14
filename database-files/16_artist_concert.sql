@@ -1,3 +1,5 @@
+USE sonic_stream;
+
 insert into artist_concert (artist_id, concert_id) values ('3', '15');
 insert into artist_concert (artist_id, concert_id) values ('36', '22');
 insert into artist_concert (artist_id, concert_id) values ('7', '17');

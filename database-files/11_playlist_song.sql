@@ -1,3 +1,5 @@
+USE sonic_stream;
+
 insert into playlist_song (listenerID, playlist_number, song_id) values ('21', '5', '40');
 insert into playlist_song (listenerID, playlist_number, song_id) values ('29', '1', '19');
 insert into playlist_song (listenerID, playlist_number, song_id) values ('16', '4', '7');

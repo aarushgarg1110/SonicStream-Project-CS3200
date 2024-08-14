@@ -1,3 +1,5 @@
+USE sonic_stream;
+
 insert into playlist (playlist_number, listener_id, name, description, createdAt, updatedat) values (7, '17', 'Chill Vibes', 'Chill beats for relaxing moments', '2024-07-06 23:55:18', '2023-12-22 19:27:53');
 insert into playlist (playlist_number, listener_id, name, description, createdAt, updatedat) values (4, '34', 'Workout Jams', 'Energizing tracks for your workout', '2023-08-18 08:17:04', '2023-10-10 22:21:29');
 insert into playlist (playlist_number, listener_id, name, description, createdAt, updatedat) values (6, '40', 'Road Trip Essentials', 'Essential songs for your road trip', '2024-04-08 22:13:25', '2024-01-08 21:06:26');

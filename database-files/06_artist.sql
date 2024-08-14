@@ -1,3 +1,5 @@
+USE sonic_stream;
+
 insert into artist (id, name, bio) values (1, 'Taylor Swift', 'Creative director with a passion for design');
 insert into artist (id, name, bio) values (2, 'Maya Thompson', 'Tech enthusiast and software developer');
 insert into artist (id, name, bio) values (3, 'Beyoncé', 'Travel blogger exploring new cultures');

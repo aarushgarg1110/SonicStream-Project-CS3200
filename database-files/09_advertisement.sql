@@ -1,3 +1,5 @@
+USE sonic_stream;
+
 insert into advertisement (id, name, company, target_location, target_age, status, revenue_id) values (1, 'Greenlam', 'HP', 'Toronto', '10-13', 'completed', '8');
 insert into advertisement (id, name, company, target_location, target_age, status, revenue_id) values (2, 'Flowdesk', 'Google', 'Mumbai', '13-18', 'completed', '4');
 insert into advertisement (id, name, company, target_location, target_age, status, revenue_id) values (3, 'Zathin', 'HP', 'Madrid', '18+', 'active', '3');

@@ -1,3 +1,5 @@
+USE sonic_stream;
+
 insert into song (id, album, title, genre, duration, release_date, revenue_id) values (1, '1989', 'Blank Space', 'Pop', '0:32', '2023-12-9', '13');
 insert into song (id, album, title, genre, duration, release_date, revenue_id) values (2, 'Thriller', 'Billie Jean', 'Pop', '1:58', '2024-3-19', '6');
 insert into song (id, album, title, genre, duration, release_date, revenue_id) values (3, 'Lemonade', 'Formation', 'R&B', '3:43', '2023-12-9', '11');

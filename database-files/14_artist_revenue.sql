@@ -1,3 +1,5 @@
+USE sonic_stream;
+
 insert into artist_revenue (artist_id, revenue_id) values ('4', '40');
 insert into artist_revenue (artist_id, revenue_id) values ('30', '39');
 insert into artist_revenue (artist_id, revenue_id) values ('21', '16');

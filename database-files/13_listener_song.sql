@@ -1,3 +1,5 @@
+USE sonic_stream;
+
 insert into listener_song (listener_id, song_id, playcount, liked_on) values ('10', '35', 128, '2024-03-02 13:15:21');
 insert into listener_song (listener_id, song_id, playcount, liked_on) values ('19', '30', 613, '2024-02-09 09:28:04');
 insert into listener_song (listener_id, song_id, playcount, liked_on) values ('22', '8', 144, '2024-06-16 00:54:21');
