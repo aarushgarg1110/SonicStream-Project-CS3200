@@ -81,7 +81,7 @@ def common_songs(username, friend):
     friend = request.view_args['friend']
 
     query = '''
-    SELECT s.title, s.album, a.name AS common_songs_with_friend
+    SELECT s.title, s.album, a.name
     FROM
     (
         SELECT l.id AS userId, lf.id AS friendID

@@ -57,13 +57,13 @@ if st.button("Act as Sarah, a Music Listener",
     logger.info("Logging in as SonicStream Listener Persona")
     st.switch_page('pages/00_Listener_Home.py')
 
-if st.button('Act as Maya, a Local Artist', 
+if st.button('Act as Billie, a Local Artist', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'artist'
-    st.session_state['username'] = 'Maya Thompson'
-    st.session_state['listener_id'] = 10
+    st.session_state['firstname'] = 'Billie'
+    st.session_state['lastname'] = 'Eilish'
     st.switch_page('pages/10_Artist_Home.py')
 
 if st.button('Act as Marketing Administrator', 

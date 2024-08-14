@@ -16,7 +16,7 @@ SideBarLinks()
 st.header('View Income From Songs')
 
 # You can access the session state to make a more customized/personalized app experience
-st.write(f"### Hi, {st.session_state['username']}.")
+st.write(f"### Hi, {st.session_state['firstname']}.")
 # Create a text input box for the user to enter the mood
 user_input = st.text_input("Enter the mood you are feeling today: ")
 
