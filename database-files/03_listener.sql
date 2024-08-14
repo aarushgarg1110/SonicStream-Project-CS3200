@@ -4,7 +4,7 @@ insert into listener (id, username, password, date_of_birth, location) values (3
 insert into listener (id, username, password, date_of_birth, location) values (4, 'gpollack3', 'sL3|992a6aIV*gBT', '2023-9-9', 'Molochnoye');
 insert into listener (id, username, password, date_of_birth, location) values (5, 'moferris4', 'pT8''5.IDuC#v', '2024-6-27', 'Portobelo');
 insert into listener (id, username, password, date_of_birth, location) values (6, 'mhuntington5', 'vR6_6WlHgB4r', '2024-5-2', 'San Isidro de Lules');
-insert into listener (id, username, password, date_of_birth, location) values (7, 'lgalvan6', 'bY3_M?W|xOCE=', '2023-821', 'Kovernino');
+insert into listener (id, username, password, date_of_birth, location) values (7, 'lgalvan6', 'bY3_M?W|xOCE=', '2023-8-21', 'Kovernino');
 insert into listener (id, username, password, date_of_birth, location) values (8, 'mdawidman7', 'vL3.Dt/N69N$,k', '2024-5-27', 'Bayonne');
 insert into listener (id, username, password, date_of_birth, location) values (9, 'mrudwell8', 'gD3%t)J2R3', '2024-6-7', 'Sukacai');
 insert into listener (id, username, password, date_of_birth, location) values (10, 'dmarsh9', 'rP2`T)>%m', '2024-5-2', 'Garibaldi');

@@ -46,5 +46,5 @@ insert into playlist (playlist_number, listener_id, name, description, createdAt
 insert into playlist (playlist_number, listener_id, name, description, createdAt, updatedat) values (5, '11', 'Pop Remixes', 'Pop remixes to keep you dancing', '2023-11-30 02:53:22', '2024-06-22 23:13:25');
 insert into playlist (playlist_number, listener_id, name, description, createdAt, updatedat) values (8, '34', 'Soulful Sunday', 'Soulful Sunday for a relaxed vibe', '2024-01-12 10:17:17', '2024-07-19 06:16:49');
 insert into playlist (playlist_number, listener_id, name, description, createdAt, updatedat) values (5, '1', 'Energetic Beats', 'Upbeat songs for high energy', '2023-10-19 17:20:46', '2024-01-18 02:34:35');
-insert into playlist (playlist_number, listener_id, name, description, createdAt, updatedat) values (5, '27', 'Chill Vibes', 'Chill beats for relaxing moments', '2023-11-30 23:41:02', '2023-10-05 15:02:42');
+insert into playlist (playlist_number, listener_id, name, description, createdAt, updatedat) values (5, '26', 'Chill Vibes', 'Chill beats for relaxing moments', '2023-11-30 23:41:02', '2023-10-05 15:02:42');
 insert into playlist (playlist_number, listener_id, name, description, createdAt, updatedat) values (5, '21', 'Workout Jams', 'Energizing tracks for your workout', '2024-07-31 17:03:15', '2024-01-14 04:54:11');

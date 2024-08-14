@@ -66,7 +66,7 @@ insert into artist_revenue (artist_id, revenue_id) values ('25', '24');
 insert into artist_revenue (artist_id, revenue_id) values ('6', '3');
 insert into artist_revenue (artist_id, revenue_id) values ('15', '13');
 insert into artist_revenue (artist_id, revenue_id) values ('39', '19');
-insert into artist_revenue (artist_id, revenue_id) values ('23', '35');
+insert into artist_revenue (artist_id, revenue_id) values ('22', '35');
 insert into artist_revenue (artist_id, revenue_id) values ('21', '33');
 insert into artist_revenue (artist_id, revenue_id) values ('35', '6');
 insert into artist_revenue (artist_id, revenue_id) values ('17', '16');
