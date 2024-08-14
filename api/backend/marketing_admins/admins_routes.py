@@ -6,6 +6,27 @@ admins = Blueprint('admins', __name__)
 # Monitor all ads (See the list)
 
 # Update status of advertisement
+@admins.route('/admins/ads/<keyword>', methods=['GET'])
+def get_songs_on_mood(keyword):
+    keyword = request.view_args['keyword']
+
+    # Get a cursor object from the database
+    cursor = db.get_db().cursor()
+
+    # Use parameterized query to avoid SQL injection
+    query = '''
+        SELECT * 
+        FROM advertisement
+        WHERE id = %s
+    '''
+
+    # Execute the query with the keyword parameter
+    cursor.execute(query, ('%' + keyword + '%'))
+
+    # fetch all the data from the cursor
+    theData = cursor.fetchall()
+
+    return jsonify(theData)
 
 # Retrieve list of songs and how much money they earned
 

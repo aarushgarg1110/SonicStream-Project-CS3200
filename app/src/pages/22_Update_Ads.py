@@ -18,20 +18,22 @@ st.header('Update an Ad')
 # You can access the session state to make a more customized/personalized app experience
 st.write(f"### Hi, {st.session_state['username']}.")
 # Create a text input box for the user to enter the mood
-user_input = st.text_input("Enter the mood you are feeling today: ")
+user_input = st.text_input("Enter the ID of the ad you wish to update: ")
 
 # Check if the user has entered something
 if user_input:
     # Replace <keyword> in the API URL with the user's input
-    try: 
-        api_url = f'http://web-api:4000/l/listeners/song/{user_input}'
+    try:
+        api_url = f'http://web-api:4000/ma/admins/ads/{user_input}'
     except:
-        st.write('could not connect to database to find songs!')
+        st.write('could not connect to database to find ads!')
 
     # Make a GET request to the API
     response = requests.get(api_url).json()
-        
+
     # Display the DataFrame in Streamlit
-    st.dataframe(response, column_order=('title', 'album', 'genre'))
+    st.dataframe(response)
+
+
 else:
-    st.write("Please enter a mood.")
+    st.write("Please enter an ad ID.")
