@@ -23,25 +23,11 @@ def get_songs_on_mood(keyword):
     # Execute the query with the keyword parameter
     cursor.execute(query, ('%' + keyword + '%'))
 
-    # grab the column headers from the returned data
-    # column_headers = [x[0] for x in cursor.description]
-
-    # create an empty dictionary object to use in 
-    # putting column headers together with data
-    # json_data = []
-
     # fetch all the data from the cursor
     theData = cursor.fetchall()
 
-    # for each of the rows, zip the data elements together with
-    # the column headers. 
-    # for row in theData:
-    #     json_data.append(dict(zip(column_headers, row)))
-
     return jsonify(theData)
 
-# follow a specific artist
-# @listeners
 # follow a specific artist
 @listeners.route('/listeners/artists', methods=['POST'])
 def follow_artists():
