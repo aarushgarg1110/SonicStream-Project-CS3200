@@ -20,9 +20,11 @@ CREATE TABLE IF NOT EXISTS friends
     friendID INT,
     PRIMARY KEY (userID, friendID),
     CONSTRAINT fk_01 FOREIGN KEY (userID) REFERENCES listener(id)
-        ON UPDATE cascade,
+        ON UPDATE cascade
+        ON DELETE cascade,
     CONSTRAINT fk_02 FOREIGN KEY (friendID) REFERENCES listener(id)
         ON UPDATE cascade
+        ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS concert
@@ -80,7 +82,7 @@ CREATE TABLE IF NOT EXISTS playlist
     updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY(listener_id, playlist_number),
     FOREIGN KEY (listener_id) REFERENCES listener(id)
-        ON UPDATE cascade
+        ON UPDATE cascade ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS revenue
@@ -117,7 +119,7 @@ CREATE TABLE IF NOT EXISTS playlist_song(
 
 CREATE TABLE IF NOT EXISTS review
 (
-    review_num INTEGER NOT NULL,
+    review_num INTEGER AUTO_INCREMENT UNIQUE NOT NULL,
     song_id INTEGER,
     listener_id INTEGER,
     text VARCHAR(2500) NOT NULL,
@@ -127,6 +129,7 @@ CREATE TABLE IF NOT EXISTS review
     CONSTRAINT fk_12 FOREIGN KEY (song_ID) REFERENCES song(id)
         ON UPDATE cascade ON DELETE cascade,
     foreign key (listener_id) REFERENCES listener(id)
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS artist_revenue(
