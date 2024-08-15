@@ -30,18 +30,29 @@ def get_songs_on_mood(keyword):
 # follow a specific artist
 @listeners.route('/listeners/artists/<username>/<artistname>', methods=['POST'])
 def follow_artists(username, artistname):
-    query = '''
-        INSERT INTO listener_artist(listener_id, artist_id)
-        SELECT l.id, a.id
-        FROM listener l, artist a
-        WHERE l.username = %s AND a.name = %s;
-    '''
+    try:
+        query = '''
+            INSERT INTO listener_artist(listener_id, artist_id)
+            SELECT l.id, a.id
+            FROM listener l, artist a
+            WHERE l.username = %s AND a.name = %s;
+        '''
+        
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (username, artistname))
+        db.get_db().commit()
+        
+        # Check if any rows were actually inserted
+        if cursor.rowcount == 0:
+            return 'Artist not found or already followed', 400
+        
+        return 'Success', 200
 
-    cursor = db.get_db().cursor()
-    cursor.execute(query, (username, artistname))
-    db.get_db().commit()
+    except Exception as e:
+        # Log the exact error for debugging purposes
+        current_app.logger.error(f"Error following artist: {str(e)}")
+        return 'Internal Server Error', 500
 
-    return 'Success'
 
 # make a review on a song
 @listeners.route('/reviews/<text>/<username>/<song>', methods=['POST'])

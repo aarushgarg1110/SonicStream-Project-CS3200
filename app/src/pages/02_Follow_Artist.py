@@ -30,9 +30,13 @@ if user_input:
         # Make a POST request to the API to follow artist
         response = requests.post(api_url)
 
+        # Log the API response
+        logger.info(f"API Response: {response.text}")
         #Check if request was successful
         if response.status_code == 200:
             st.write(f"Successfully followed {user_input}")
+        elif response.status_code == 400:
+            st.write(f"Artist {user_input} not found or already followed.")
         else:
             st.write(f"Failed to follow {user_input}. Status Code: {response.status_code}")
     except requests.exceptions.RequestException as e:
