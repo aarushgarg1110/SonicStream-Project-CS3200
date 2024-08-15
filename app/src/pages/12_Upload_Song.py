@@ -34,4 +34,4 @@ if user_input:
     # Display the DataFrame in Streamlit
     st.dataframe(response, column_order=('title', 'album', 'genre'))
 else:
-    st.write("Please enter a mood.")
+    st.write("Please enter new song.")
