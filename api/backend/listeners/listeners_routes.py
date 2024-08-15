@@ -83,6 +83,28 @@ def make_review(text, username, song):
 
 # delete a review from a song
 
+# retrieve all of [userID, friendID, username, friend_username] for a user
+# code to extract friend username from this is in 04_common_songs
+@listeners.route('/listeners/friends/<username>', methods=['GET'])
+def get_friends(username):
+    current_app.logger.info('listeners_routes.py: GET /friends')
+
+    username = request.view_args['username']
+
+    query = '''
+    SELECT l.id AS userID, lf.id AS friendID, l.username AS listener1, lf.username AS listener2
+    FROM listener l
+         JOIN friends f ON l.id = f.userID
+         JOIN listener lf ON lf.id = f.friendID
+        WHERE l.username = %s
+        OR lf.username = %s;
+    '''
+    cursor = db.get_db().cursor()
+    cursor.execute(query, (username, username))
+
+    friends = cursor.fetchall()
+    return jsonify(friends)
+
 # retrieve all songs that a user has in common with their friend
 @listeners.route('/listeners/songs/<username>/<friend>', methods=['GET'])
 def common_songs(username, friend):
