@@ -18,10 +18,19 @@ user = st.session_state['username']
 
 # You can access the session state to make a more customized/personalized app experience
 st.write(f"### Hi, {st.session_state['username']}.")
+response = requests.get(f'http://web-api:4000/l/listeners/get_songs').json()
+# gives list of all song names
+
+songs = [r['title'] for r in response] # cleans up response a little bit
 
 # User enters song title and review and submits
 with st.form("Write a Review"):
-    song_title = st.text_input("Input Song title:")
+    song_title = st.selectbox(
+        "Select songs name",
+        songs,
+        index=None,
+        placeholder="Select song...",
+    )
     review_text = st.text_input("Provide review description:")
     submitted = st.form_submit_button("Submit")
 

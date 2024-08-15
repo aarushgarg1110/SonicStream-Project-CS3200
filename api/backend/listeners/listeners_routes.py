@@ -53,6 +53,17 @@ def follow_artists(username, artistname):
         current_app.logger.error(f"Error following artist: {str(e)}")
         return 'Internal Server Error', 500
 
+# get list of all songs - for use in 03_review_song
+@listeners.route('/listeners/get_songs', methods=['GET'])
+def get_songs():
+    cursor = db.get_db().cursor()
+    query = '''
+    SELECT title
+    FROM song
+    '''
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    return jsonify(theData)
 
 # make a review on a song
 @listeners.route('/reviews/<text>/<username>/<song>', methods=['POST'])
