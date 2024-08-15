@@ -7,6 +7,7 @@ def HomeNav():
     st.sidebar.page_link("Home.py", label="Home", icon='🏠')
 
 def AboutPageNav():
+    st.sidebar.page_link("Home.py", label="Home", icon='🏠')
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
 
 #### ------------------------ Role of listener ------------------------
@@ -28,15 +29,6 @@ def ArtistHomeNav():
     st.sidebar.page_link("pages/12_Upload_Song.py", label="Upload A Song", icon='🎶')
     st.sidebar.page_link("pages/13_Popular_Songs.py", label="View Most Popular Songs", icon='🔥')
     st.sidebar.page_link("pages/14_Promote_Concert.py", label="Promote A Concert", icon='🥁')
-
-def ApiTestNav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon='🛜')
-
-def PredictionNav():
-    st.sidebar.page_link("pages/11_Prediction.py", label="Regression Prediction", icon='📈')
-
-def ClassificationNav():
-    st.sidebar.page_link("pages/13_Classification.py", label="Classification Demo", icon='🌺')
 
 #### ------------------------ Marketing Admin Role ------------------------
 def AdminPageNav():
@@ -77,9 +69,6 @@ def SideBarLinks(show_home=False):
         # If the user role is usaid worker, show the Api Testing page
         if st.session_state['role'] == 'artist':
             ArtistHomeNav()
-            PredictionNav()
-            ApiTestNav() 
-            ClassificationNav()
         
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state['role'] == 'administrator':
