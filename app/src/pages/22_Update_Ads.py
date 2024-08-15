@@ -19,9 +19,26 @@ st.header('Update an Ad')
 st.write(f"### Hi, {st.session_state['username']}.")
 # Create a text input box for the user to enter the mood
 
-with st.form("Write a Review"):
-    name = st.text_input("Enter the name of the ad you wish to update: ")
-    status = st.text_input("Enter the new status for this ad: ")
+response = requests.get(f'http://web-api:4000/ma/admins/seeAds').json()
+ad_names = [r['name'] for r in response]
+# this api is for the monitor ads, so it returns more than ad name
+# we only care about ad name here, so this isolates the ad name
+ad_statuses = ['completed', 'paused', 'active']
+# hardcoded list of acceptable statuses to be used in the form
+
+with st.form("Change ad"):
+    name = st.selectbox(
+        "Select ad name",
+        ad_names,
+        index=None,
+        placeholder="Select ad...",
+    )
+    status = st.selectbox(
+        "Select ad status",
+        ad_statuses,
+        index=None,
+        placeholder="Select status...",
+    )
     submitted = st.form_submit_button("Submit")
 
 # Check if the user has entered something
