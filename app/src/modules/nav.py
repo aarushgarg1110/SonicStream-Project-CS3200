@@ -64,7 +64,7 @@ def SideBarLinks(show_home=False):
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
         if st.session_state['role'] == 'listener':
             ListenerHomeNav()
-            MapDemoNav()
+            # MapDemoNav()
 
         # If the user role is usaid worker, show the Api Testing page
         if st.session_state['role'] == 'artist':
