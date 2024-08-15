@@ -12,26 +12,36 @@ from modules.nav import SideBarLinks
 # Call the SideBarLinks from the nav module in the modules directory
 SideBarLinks()
 
-# set the header of the page
+# Set the header of the page
 st.header('Upload A Song')
 
 # You can access the session state to make a more customized/personalized app experience
 st.write(f"### Hi, {st.session_state['username']}.")
-# Create a text input box for the user to enter the mood
-user_input = st.text_input("Enter the mood you are feeling today: ")
 
-# Check if the user has entered something
-if user_input:
-    # Replace <keyword> in the API URL with the user's input
-    try: 
-        api_url = f'http://web-api:4000/l/listeners/song/{user_input}'
-    except:
-        st.write('could not connect to database to find songs!')
+# Create input boxes for the necessary song details
+artist = st.text_input("Enter the artist name:")
+album = st.text_input("Enter the album name:")
+title = st.text_input("Enter the song title:")
+genre = st.text_input("Enter the genre:")
+duration = st.text_input("Enter the duration (in seconds):")
 
-    # Make a GET request to the API
-    response = requests.get(api_url).json()
-        
-    # Display the DataFrame in Streamlit
-    st.dataframe(response, column_order=('title', 'album', 'genre'))
-else:
-    st.write("Please enter new song.")
+# Add a button to submit the form
+if st.button("Upload Song"):
+    # Check if all fields are filled
+    if artist and album and title and genre and duration:
+        try:
+            # Replace with your API URL
+            api_url = f'http://web-api:4000/artists/songs/upload/{artist}/{album}/{title}/{genre}/{duration}'
+            
+            # Make the POST request to the API
+            response = requests.post(api_url)
+            
+            # Check the response status
+            if response.status_code == 200:
+                st.success("Song uploaded successfully!")
+            else:
+                st.error("Failed to upload the song. Please try again.")
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
+    else:
+        st.error("Please fill in all the fields.")
