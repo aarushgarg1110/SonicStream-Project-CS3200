@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS playlist_song(
 
 CREATE TABLE IF NOT EXISTS review
 (
-    review_num INTEGER NOT NULL,
+    review_num INTEGER AUTO_INCREMENT UNIQUE NOT NULL,
     song_id INTEGER,
     listener_id INTEGER,
     text VARCHAR(2500) NOT NULL,
