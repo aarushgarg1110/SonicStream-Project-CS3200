@@ -23,20 +23,11 @@ def get_artist_revenue(fname, lname):
     return jsonify(theData)
 
 # Upload a song
-@artists.route('/artists/songs/upload', methods=['POST'])
-def upload_song():
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    album = the_data['album']
-    title = the_data['title']
-    genre = the_data['genre']
-    duration = the_data['duration']
-    revenue_id = the_data['revenue_id']
-    
+@artists.route('/artists/songs/upload/<album>/<title>/<genre>/<duration>', methods=['POST'])
+def upload_song(album, title, genre, duration):
     query_revenue = '''
         INSERT INTO revenue (song_payout, company_revenue)
-        VALUES (0, 0, %s, %s, %s, %s)
+        VALUES (0, 0)
     '''
     
     query_song = '''
@@ -88,21 +79,15 @@ def get_song_reviews(song):
     return jsonify(theData)
 
 # Promote a concert
-@artists.route('/artists/concerts/upload', methods=['POST'])
-def upload_concert():
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    venue = the_data['venue']
-    event_date = the_data['event_date']
-    
+@artists.route('/artists/concerts/upload/<venue>/<date>', methods=['POST'])
+def upload_concert(venue, date):
     query = '''
         INSERT INTO concert (venue, event_date)
         VALUES (%s, %s, %s)
     '''
 
     cursor = db.get_db().cursor()
-    cursor.execute(query, (venue, event_date))
+    cursor.execute(query, (venue, date))
     db.get_db().commit()
 
     return 'Success'
