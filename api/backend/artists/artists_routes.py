@@ -23,8 +23,8 @@ def get_artist_revenue(fname, lname):
     return jsonify(theData)
 
 # Upload a song
-@artists.route('/artists/songs/upload/<artist>/<album>/<title>/<genre>/<duration>', methods=['POST'])
-def upload_song(artist, album, title, genre, duration):
+@artists.route('/artists/songs/upload/<fname>/<lname>/<album>/<title>/<genre>/<duration>', methods=['POST'])
+def upload_song(fname, lname, album, title, genre, duration):
     query_revenue = '''
         INSERT INTO revenue (song_payout, company_revenue)
         VALUES (0, 0)
@@ -32,12 +32,16 @@ def upload_song(artist, album, title, genre, duration):
     
     query_song = '''
         INSERT INTO song (album, title, genre, duration, revenue_id)
-        VALUES (%s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s, %s)
+    '''
+
+    query_artist_id = '''
+        SELECT id FROM artist WHERE name = %s
     '''
 
     query_artist_song = '''
         INSERT INTO artist_song (artist_id, song_id)
-        VALUES (%s, %s, %s, %s)
+        VALUES (%s, %s)
     '''
 
     cursor = db.get_db().cursor()
@@ -45,7 +49,10 @@ def upload_song(artist, album, title, genre, duration):
     revenue_id = cursor.lastrowid
     cursor.execute(query_song, (album, title, genre, duration, revenue_id))
     song_id = cursor.lastrowid
-    cursor.execute(query_artist_song, (artist, song_id))
+    cursor.execute(query_artist_id, (fname + ' ' + lname))
+    artist_row = cursor.fetchone()
+    artist_id = artist_row['id']
+    cursor.execute(query_artist_song, (artist_id, song_id))
     db.get_db().commit()
 
     return 'Success'

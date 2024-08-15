@@ -16,22 +16,23 @@ SideBarLinks()
 st.header('Upload A Song')
 
 # You can access the session state to make a more customized/personalized app experience
-st.write(f"### Hi, {st.session_state['username']}.")
+st.write(f"### Hi, {st.session_state['firstname']}.")
 
 # Create input boxes for the necessary song details
-artist = st.text_input("Enter the artist name:")
+fname = st.session_state['firstname']
+lname = st.session_state['lastname']
 album = st.text_input("Enter the album name:")
 title = st.text_input("Enter the song title:")
 genre = st.text_input("Enter the genre:")
-duration = st.text_input("Enter the duration (in seconds):")
+duration = st.text_input("Enter the duration (in time format):")
 
 # Add a button to submit the form
 if st.button("Upload Song"):
     # Check if all fields are filled
-    if artist and album and title and genre and duration:
+    if album and title and genre and duration:
         try:
             # Replace with your API URL
-            api_url = f'http://web-api:4000/artists/songs/upload/{artist}/{album}/{title}/{genre}/{duration}'
+            api_url = f'http://web-api:4000/a/artists/songs/upload/{fname}/{lname}/{album}/{title}/{genre}/{duration}'
             
             # Make the POST request to the API
             response = requests.post(api_url)
