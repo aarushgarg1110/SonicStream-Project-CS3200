@@ -116,3 +116,14 @@ def common_songs(username, friend):
     return jsonify(common_songs)
 
 
+@listeners.route('/listeners/seeArtists', methods=['GET'])
+def seeArtists():
+    cursor = db.get_db().cursor()
+    query = '''
+    SELECT name FROM artist
+    '''
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    return jsonify(theData)
+
+
