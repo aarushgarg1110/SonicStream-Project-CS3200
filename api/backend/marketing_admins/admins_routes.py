@@ -6,11 +6,8 @@ admins = Blueprint('admins', __name__)
 # Monitor all ads (See the list)
 
 # Update status of advertisement
-@admins.route('/admins/ad_fetch', methods=['PUT'])
-def get_songs_on_mood(keyword):
-    current_app.logger.info('PUT /customers route')
-    data = request.json
-    name, status = data['name'], data['request']
+@admins.route('/admins/ad_fetch/<status>/<name>', methods=['PUT'])
+def get_songs_on_mood(status, name):
 
     # Get a cursor object from the database
     cursor = db.get_db().cursor()
@@ -23,7 +20,7 @@ def get_songs_on_mood(keyword):
     # Execute the query with the keyword parameter
 
     args = (status, name)
-    r = cursor.execute(query, args)
+    cursor.execute(query, args)
     db.get_db().commit()
 
     return f'Updated ad with ID {name} to status {status}'
