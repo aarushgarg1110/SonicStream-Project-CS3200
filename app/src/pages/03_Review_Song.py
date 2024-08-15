@@ -20,15 +20,14 @@ user = st.session_state['username']
 st.write(f"### Hi, {st.session_state['username']}.")
 
 # User enters song title and review and submits
-with st.form("Change ad status"):
+with st.form("Write a Review"):
     song_title = st.text_input("Input Song title:")
     review_text = st.text_input("Provide review description:")
     submitted = st.form_submit_button("Submit")
 
 if submitted:
     #Construct API URL
-    api_url = f'http://web-api:4000/l/listeners/songs/{user}/{song_title}/{review_text} '
-    # Replace <keyword> in the API URL with the user's input
+    api_url = f'http://web-api:4000/l/reviews/{review_text}/{user}/{song_title}'
     try: 
         # Make a POST request to the API to follow artist
         response = requests.post(api_url)

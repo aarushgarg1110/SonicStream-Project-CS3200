@@ -44,21 +44,23 @@ def follow_artists(username, artistname):
     return 'Success'
 
 # make a review on a song
-@listeners.route('/reviews/<username>/<song>/<text>', methods=['POST'])
-def make_review(username, song, text):
-    current_app.logger.info('listener_routes.py: POST /reviews')
+@listeners.route('/reviews/<text>/<username>/<song>', methods=['POST'])
+def make_review(text, username, song):
 
-    # Adjust the query to insert without review_num
     query = '''
     INSERT INTO review(song_id, listener_id, text)
     SELECT s.id, l.id, %s
     FROM listener l, song s
     WHERE l.username = %s AND s.title = %s
     '''
-
-    cursor = db.get_db().cursor()
-    cursor.execute(query, (text, username, song))
-    db.get_db().commit()
+    try:
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (text, username, song))
+        db.get_db().commit()
+    except Exception as e:
+        current_app.logger.error(f'Error while inserting review: {e}')
+        db.get_db().rollback()  # Rollback transaction on error
+        return 'Failed to upload review', 500
 
     return 'Success'
 
