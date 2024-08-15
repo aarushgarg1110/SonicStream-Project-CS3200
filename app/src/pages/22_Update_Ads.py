@@ -18,43 +18,24 @@ st.header('Update an Ad')
 # You can access the session state to make a more customized/personalized app experience
 st.write(f"### Hi, {st.session_state['username']}.")
 # Create a text input box for the user to enter the mood
-user_input = st.text_input("Enter the ID of the ad you wish to update: ")
+
+with st.form("Write a Review"):
+    name = st.text_input("Enter the name of the ad you wish to update: ")
+    status = st.text_input("Enter the new status for this ad: ")
+    submitted = st.form_submit_button("Submit")
 
 # Check if the user has entered something
-if user_input:
+if submitted:
     # Replace <keyword> in the API URL with the user's input
+    api_url = f'http://web-api:4000/ma/admins/ad_fetch/{status}/{name}'
     try:
-        api_url = f'http://web-api:4000/ma/admins/ad_fetch/{user_input}'
-    except:
-        st.write('could not connect to database to find ads!')
-
-    # Make a GET request to the API
-    response_get = requests.get(api_url).json()
-
-    # Display the DataFrame in Streamlit
-    st.dataframe(response_get)
-
-    user_input_2 = st.text_input("Enter the status you wish to change this ad to: ")
-
-    if user_input_2:
-        data = {}
-        data['id'] = user_input
-        data['status'] = user_input_2
-        try:
-            api_url_fetch = f'http://web-api:4000/ma/admins/ad_update/'
-        except:
-            st.write('could not connect to database to find ads!')
-
-        # Make a GET request to the API
-        # response = requests.get(api_url).json()
-        requests.post(api_url_fetch, json=data)
-
-        response_fetch = requests.get(api_url).json()
-
-        # Display the DataFrame in Streamlit
-        st.dataframe(response_fetch)
-
-
-
+        response = requests.put(api_url)
+        if response.status_code == 200:
+            st.write(f"Successfully changed status.")
+        else:
+            st.write(f"Failed to update status. Status Code: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        st.write('Could not connect to database to follow update status!')
+        logger.error(f"Error occurred: {e}")
 else:
-    st.write("Please enter an ad ID.")
+    st.write("Please type in ad name and status.")

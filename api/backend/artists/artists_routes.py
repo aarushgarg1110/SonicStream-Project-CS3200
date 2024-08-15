@@ -23,6 +23,32 @@ def get_artist_revenue(fname, lname):
     return jsonify(theData)
 
 # Upload a song
+@artists.route('/artists/songs/upload/<artist>/<album>/<title>/<genre>/<duration>', methods=['POST'])
+def upload_song(artist, album, title, genre, duration):
+    query_revenue = '''
+        INSERT INTO revenue (song_payout, company_revenue)
+        VALUES (0, 0)
+    '''
+    
+    query_song = '''
+        INSERT INTO song (album, title, genre, duration, revenue_id)
+        VALUES (%s, %s, %s, %s)
+    '''
+
+    query_artist_song = '''
+        INSERT INTO artist_song (artist_id, song_id)
+        VALUES (%s, %s, %s, %s)
+    '''
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query_revenue)
+    revenue_id = cursor.lastrowid
+    cursor.execute(query_song, (album, title, genre, duration, revenue_id))
+    song_id = cursor.lastrowid
+    cursor.execute(query_artist_song, (artist, song_id))
+    db.get_db().commit()
+
+    return 'Success'
 
 # Retrieve an artist’s most popular songs
 @artists.route('/artists/popularSongs/<fname>/<lname>', methods=['GET'])
@@ -44,5 +70,39 @@ def get_artist_songs(fname, lname):
     return jsonify(theData)
 
 # Look at all reviews on a song
+@artists.route('/artists/song/reviews', methods=['GET'])
+def get_song_reviews(song):
+    song = request.view_args[song]
+    cursor = db.get_db().cursor()
+    query = '''
+        SELECT s.title, r.text
+        FROM review r
+	    JOIN song s ON r.song_id = s.id
+        WHERE a.name = %s
+        ORDER BY revenue_in_$ DESC;
+    '''
+    cursor.execute(query, song)
+    theData = cursor.fetchall()
+    return jsonify(theData)
 
 # Promote a concert
+@artists.route('/artists/concerts/upload/<artist>/<venue>/<date>', methods=['POST'])
+def upload_concert(artist, venue, date):
+    query_concert = '''
+        INSERT INTO concert (venue, event_date)
+        VALUES (%s, %s)
+    '''
+
+    query_artist_concert = '''
+        INSERT INTO artist_concert (artist_id, song_id)
+        VALUES (%s, %s)
+    '''
+
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query_concert, (venue, date))
+    song_id = cursor.lastrowid
+    cursor.execute(query_artist_concert, (artist, song_id))
+    db.get_db().commit()
+
+    return 'Success'
