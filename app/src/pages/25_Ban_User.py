@@ -18,13 +18,27 @@ st.header('Ban A User')
 # You can access the session state to make a more customized/personalized app experience
 st.write(f"### Hi, {st.session_state['username']}.")
 # Create a text input box for the user to enter the mood
-user_input = st.text_input("Which user would you like to ban: ")
+
+# get all users to use with a select box
+get_users_url = f'http://web-api:4000/ma/admins/get_users'
+users = requests.get(get_users_url).json()
+
+users_cleaned = [user['username'] for user in users]
+
+# user_input = st.text_input("Which user would you like to ban: ")
+user_input = st.selectbox(
+    "Select user to ban",
+    users_cleaned,
+    index=None,
+    placeholder="Select user...",
+)
 
 # Check if the user has entered something
 if user_input:
 
+    username = user_input
     #Construct API URL
-    api_url = f'http://web-api:4000/ma/admins/ban/{user_input}'
+    api_url = f'http://web-api:4000/ma/admins/ban/{username}'
    
     try: 
         # Make a POST request to the API to follow artist
@@ -32,7 +46,7 @@ if user_input:
 
         #Check if request was successful
         if response.status_code == 200:
-            st.write(f"Successfully deleted {user_input}")
+            st.write(f"Successfully deleted {username}")
         else:
             st.write(f"Failed to delete {user_input}. Status Code: {response.status_code}")
     except requests.exceptions.RequestException as e:

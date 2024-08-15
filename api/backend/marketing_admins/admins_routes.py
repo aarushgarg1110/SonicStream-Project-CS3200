@@ -66,6 +66,18 @@ def seeMoney():
     theData = cursor.fetchall()
     return jsonify(theData)
 
+# grab all users from the app to be used to remove
+@admins.route('/admins/get_users', methods=['GET'])
+def get_users():
+    cursor = db.get_db().cursor()
+    query = '''
+    SELECT username
+    FROM listener
+    '''
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    return jsonify(theData)
+
 # Remove a user from the app if needed
 @admins.route('/admins/ban/<username>', methods=['DELETE'])
 def ban(username):
