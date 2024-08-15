@@ -7,6 +7,7 @@ def HomeNav():
     st.sidebar.page_link("Home.py", label="Home", icon='🏠')
 
 def AboutPageNav():
+    st.sidebar.page_link("Home.py", label="Home", icon='🏠')
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
 
 #### ------------------------ Role of listener ------------------------
