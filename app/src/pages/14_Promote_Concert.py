@@ -19,15 +19,19 @@ st.write(f"### Hi, {st.session_state['firstname']}.")
 fname = st.session_state['firstname']
 lname = st.session_state['lastname']
 venue = st.text_input("Enter the venue:")
-date = st.text_input("Enter the date:")
+# Use a date picker for the date input
+date = st.date_input("Select the date:")
 
 # Add a button to submit the form
 if st.button("Upload Concert"):
     # Check if all fields are filled
     if venue and date:
         try:
+            # Convert the date to a string in the desired format (e.g., YYYY-MM-DD)
+            date_str = date.strftime('%Y-%m-%d')
+
             # Replace with your API URL
-            api_url = f'http://web-api:4000/a/artists/concerts/upload/{fname}/{lname}/{venue}/{date}'
+            api_url = f'http://web-api:4000/a/artists/concerts/upload/{fname}/{lname}/{venue}/{date_str}'
             
             # Make the POST request to the API
             response = requests.post(api_url)
