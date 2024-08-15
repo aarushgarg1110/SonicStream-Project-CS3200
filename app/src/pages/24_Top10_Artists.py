@@ -17,10 +17,13 @@ st.header('Hottest Artists of The Month')
 
 # You can access the session state to make a more customized/personalized app experience
 st.write(f"### Hi, {st.session_state['username']}.")
-st.write(f"Here are the top 10 most liked artists based on recent likes")
+
+x = st.slider('How many days back would you like to consider for likes?', 1, 365, 30)
+
+st.write(f"Here are the top 10 most liked artists based on recent likes in the past {x} days")
 
 try:
-    api_url = f'http://web-api:4000/ma/admins/top_ten_artists'
+    api_url = f'http://web-api:4000/ma/admins/top_ten_artists/{x}'
 except:
     st.write('could not connect to database to find songs!')
 

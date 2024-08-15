@@ -36,18 +36,19 @@ def get_songs_on_mood(status, name):
     return f'Updated ad with ID {name} to status {status}'
 
 # top ten artists by likes in the past 30 days
-@admins.route('/admins/top_ten_artists', methods=['GET'])
-def top_ten_artists():
+@admins.route('/admins/top_ten_artists/<days>', methods=['GET'])
+def top_ten_artists(days):
+    days = request.view_args['days']
     cursor = db.get_db().cursor()
     query = '''SELECT a.name, COUNT(ls.liked_on) as likes
             FROM artist a JOIN artist_song asg ON a.id = asg.artist_id
             NATURAL JOIN listener_song ls
-            WHERE ls.liked_on >= CURDATE() - interval 30 day
+            WHERE ls.liked_on >= CURDATE() - interval %s day
             GROUP BY a.name
             ORDER BY likes DESC
             LIMIT 10;
         '''
-    cursor.execute(query)
+    cursor.execute(query, days)
     theData = cursor.fetchall()
     return jsonify(theData)
 
