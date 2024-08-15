@@ -6,7 +6,7 @@ USE sonic_stream;
 
 CREATE TABLE IF NOT EXISTS listener
 (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     username varchar(255) UNIQUE NOT NULL,
     password varchar(255) NOT NULL,
     date_of_birth DATE NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS friends
 
 CREATE TABLE IF NOT EXISTS concert
 (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     venue VARCHAR(60),
     event_date DATE
 );
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS listener_concert
 
 CREATE TABLE IF NOT EXISTS artist
 (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     bio VARCHAR(2500) NOT NULL
 );
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS playlist
 
 CREATE TABLE IF NOT EXISTS revenue
 (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     song_payout DECIMAL NOT NULL,
     company_revenue DECIMAL NOT NULL,
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS revenue
 
 CREATE TABLE IF NOT EXISTS song
 (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     album VARCHAR(70),
     title VARCHAR(50) NOT NULL,
     genre VARCHAR(50),
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS artist_song(
 );
 
 CREATE TABLE IF NOT EXISTS advertisement(
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(60) UNIQUE NOT NULL,
     company VARCHAR(60) NOT NULL,
     target_location VARCHAR(100),
