@@ -18,43 +18,27 @@ st.header('Update an Ad')
 # You can access the session state to make a more customized/personalized app experience
 st.write(f"### Hi, {st.session_state['username']}.")
 # Create a text input box for the user to enter the mood
-user_input = st.text_input("Enter the ID of the ad you wish to update: ")
+user_input = st.text_input("Enter the name of the ad you wish to update: ")
+user_input_2 = st.text_input("Enter the new status for this ad: ")
 
 # Check if the user has entered something
-if user_input:
+if user_input and user_input_2:
     # Replace <keyword> in the API URL with the user's input
     try:
-        api_url = f'http://web-api:4000/ma/admins/ad_fetch/{user_input}'
+        api_url = f'http://web-api:4000/ma/admins/ad_fetch'
     except:
-        st.write('could not connect to database to find ads!')
+        st.write('could not connect to database to update ads!')
 
-    # Make a GET request to the API
-    response_get = requests.get(api_url).json()
+    data = {}
+    data['name'] = user_input
+    data['status'] = user_input_2
 
-    # Display the DataFrame in Streamlit
-    st.dataframe(response_get)
+    # Make a put request to the API
+    requests.put(api_url, json=data)
 
-    user_input_2 = st.text_input("Enter the status you wish to change this ad to: ")
-
-    if user_input_2:
-        data = {}
-        data['id'] = user_input
-        data['status'] = user_input_2
-        try:
-            api_url_fetch = f'http://web-api:4000/ma/admins/ad_update/'
-        except:
-            st.write('could not connect to database to find ads!')
-
-        # Make a GET request to the API
-        # response = requests.get(api_url).json()
-        requests.post(api_url_fetch, json=data)
-
-        response_fetch = requests.get(api_url).json()
-
-        # Display the DataFrame in Streamlit
-        st.dataframe(response_fetch)
-
-
+    # Display a success message in streamlit
+    st.write(data)
+    st.write(f'Updated ad with ID {user_input} to status {user_input_2}')
 
 else:
-    st.write("Please enter an ad ID.")
+    st.write("Please enter an ad name & status.")

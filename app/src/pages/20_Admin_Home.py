@@ -24,7 +24,7 @@ if st.button('Update the Status of an Ad',
 if st.button('Fetch the 10 most recently liked artists',
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/24_Top10_ARtists.py')
+  st.switch_page('pages/24_Top10_Artists.py')
 
 if st.button('Ban a User',
              type='primary',
