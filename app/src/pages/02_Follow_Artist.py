@@ -14,7 +14,7 @@ SideBarLinks()
 
 # set the header of the page
 st.header('Follow An Artist')
-
+user = st.session_state['username']
 # You can access the session state to make a more customized/personalized app experience
 st.write(f"### Hi, {st.session_state['username']}.")
 # Create a text input box for the user to enter the mood
@@ -22,16 +22,21 @@ user_input = st.text_input("Which artist would you like to follow: ")
 
 # Check if the user has entered something
 if user_input:
-    # Replace <keyword> in the API URL with the user's input
-    try: 
-        api_url = f'http://web-api:4000/l/listeners/song/{user_input}'
-    except:
-        st.write('could not connect to database to find songs!')
 
-    # Make a GET request to the API
-    response = requests.get(api_url).json()
-        
-    # Display the DataFrame in Streamlit
-    st.dataframe(response, column_order=('title', 'album', 'genre'))
+    #Construct API URL
+    api_url = f'http://web-api:4000/l/listeners/artists/{user}/{user_input}'
+   
+    try: 
+        # Make a POST request to the API to follow artist
+        response = requests.post(api_url)
+
+        #Check if request was successful
+        if response.status_code == 200:
+            st.write(f"Successfully followed {user_input}")
+        else:
+            st.write(f"Failed to follow {user_input}. Status Code: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        st.write('could not connect to database to follow artist!')
+        logger.error(f"Error occurred: {e}")
 else:
-    st.write("Please enter a song.")
+    st.write("Please enter an artist name.")

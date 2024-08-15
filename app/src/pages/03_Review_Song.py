@@ -14,24 +14,32 @@ SideBarLinks()
 
 # set the header of the page
 st.header('Review A Song')
+user = st.session_state['username']
 
 # You can access the session state to make a more customized/personalized app experience
 st.write(f"### Hi, {st.session_state['username']}.")
-# Create a text input box for the user to enter the mood
-user_input = st.text_input("Which song would you like to leave a review on: ")
 
-# Check if the user has entered something
-if user_input:
+# User enters song title and review and submits
+with st.form("Write a Review"):
+    song_title = st.text_input("Input Song title:")
+    review_text = st.text_input("Provide review description:")
+    submitted = st.form_submit_button("Submit")
+
+if submitted:
+    #Construct API URL
+    api_url = f'http://web-api:4000/l/listeners/songs/{user}/{song_title}/{review_text} '
     # Replace <keyword> in the API URL with the user's input
     try: 
-        api_url = f'http://web-api:4000/l/listeners/song/{user_input}'
-    except:
-        st.write('could not connect to database to find songs!')
+        # Make a POST request to the API to follow artist
+        response = requests.post(api_url)
 
-    # Make a GET request to the API
-    response = requests.get(api_url).json()
-        
-    # Display the DataFrame in Streamlit
-    st.dataframe(response, column_order=('title', 'album', 'genre'))
+        #Check if request was successful
+        if response.status_code == 200:
+            st.write(f"Successfully uploaded review")
+        else:
+            st.write(f"Failed to upload review. Status Code: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        st.write('Could not connect to database to follow upload review!')
+        logger.error(f"Error occurred: {e}")
 else:
-    st.write("Please enter a song.")
+    st.write("Please submit review.")

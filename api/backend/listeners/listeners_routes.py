@@ -28,42 +28,36 @@ def get_songs_on_mood(keyword):
     return jsonify(theData)
 
 # follow a specific artist
-@listeners.route('/listeners/artists', methods=['POST'])
-def follow_artists():
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    listener_id = the_data['listener_id']
-    artist_id = the_data['artist_id']
-    
+@listeners.route('/listeners/artists/<username>/<artistname>', methods=['POST'])
+def follow_artists(username, artistname):
     query = '''
         INSERT INTO listener_artist(listener_id, artist_id)
-        VALUES (%s, %s)
+        SELECT l.id, a.id
+        FROM listener l, artist a
+        WHERE l.username = %s AND a.name = %s;
     '''
 
     cursor = db.get_db().cursor()
-    cursor.execute(query, (listener_id, artist_id))
+    cursor.execute(query, (username, artistname))
     db.get_db().commit()
 
     return 'Success'
 
 # make a review on a song
-@listeners.route('/reviews', methods=['POST'])
-def make_review():
-    the_data = request.json
-    current_app.logger.info(the_data)
+@listeners.route('/reviews/<username>/<song>/<text>', methods=['POST'])
+def make_review(username, song, text):
+    current_app.logger.info('listener_routes.py: POST /reviews')
 
-    listener_id = the_data['listener_id']
-    song_id = the_data['song_id']
-    review_num = the_data['review_num']
-    text = the_data['text']
-
-    query = ''''
-    INSERT INTO review(song_id, review_num, listener_id, text)
-    VALUES (%s, %s, %s, %s)
+    # Adjust the query to insert without review_num
+    query = '''
+    INSERT INTO review(song_id, listener_id, text)
+    SELECT s.id, l.id, %s
+    FROM listener l, song s
+    WHERE l.username = %s AND s.title = %s
     '''
+
     cursor = db.get_db().cursor()
-    cursor.execute(query, (song_id, review_num, listener_id, text))
+    cursor.execute(query, (text, username, song))
     db.get_db().commit()
 
     return 'Success'
