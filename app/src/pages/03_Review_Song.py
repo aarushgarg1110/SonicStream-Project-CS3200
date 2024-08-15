@@ -20,7 +20,7 @@ user = st.session_state['username']
 st.write(f"### Hi, {st.session_state['username']}.")
 
 # User enters song title and review and submits
-with st.form("Write a Review"):
+with st.form("Change ad status"):
     song_title = st.text_input("Input Song title:")
     review_text = st.text_input("Provide review description:")
     submitted = st.form_submit_button("Submit")

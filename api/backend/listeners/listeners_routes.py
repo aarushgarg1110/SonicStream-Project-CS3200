@@ -44,7 +44,7 @@ def follow_artists(username, artistname):
     return 'Success'
 
 # make a review on a song
-@listeners.route('/reviews/<username>/<song>/<text>', methods=['POST'])
+@listeners.route('/listeners/reviews/<username>/<song>/<text>', methods=['POST'])
 def make_review(username, song, text):
     current_app.logger.info('listener_routes.py: POST /reviews')
 
