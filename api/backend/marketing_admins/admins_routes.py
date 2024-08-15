@@ -75,5 +75,6 @@ def ban(username):
     WHERE username = %s
     '''
     cursor.execute(query, username)
-    theData = cursor.fetchall()
-    return jsonify(theData)
+    # theData = cursor.fetchall()
+    db.get_db().commit()
+    return f'Successfully removed user {username}'
