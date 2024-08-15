@@ -35,10 +35,12 @@ if submitted:
         #Check if request was successful
         if response.status_code == 200:
             st.write(f"Successfully uploaded review")
+        elif response.status_code ==400:
+            st.write(f"Song '{song_title}' not found.")
         else:
             st.write(f"Failed to upload review. Status Code: {response.status_code}")
     except requests.exceptions.RequestException as e:
-        st.write('Could not connect to database to follow upload review!')
+        st.write('Could not connect to database to upload review!')
         logger.error(f"Error occurred: {e}")
 else:
     st.write("Please submit review.")

@@ -68,12 +68,16 @@ def make_review(text, username, song):
         cursor = db.get_db().cursor()
         cursor.execute(query, (text, username, song))
         db.get_db().commit()
+
+        if cursor.rowcount == 0:
+            return 'Song not found', 400
+        
+        return 'Success', 200
+    
     except Exception as e:
-        current_app.logger.error(f'Error while inserting review: {e}')
-        db.get_db().rollback()  # Rollback transaction on error
+        current_app.logger.error(f'Error while inserting review: {str(e)}')
         return 'Failed to upload review', 500
 
-    return 'Success'
 
 # edit a review on a song
 
