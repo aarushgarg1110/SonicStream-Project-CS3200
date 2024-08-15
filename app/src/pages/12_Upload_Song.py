@@ -32,7 +32,7 @@ if st.button("Upload Song"):
     if album and title and genre and duration:
         try:
             # Replace with your API URL
-            api_url = f'http://web-api:4000/a/artists/songs/upload/{fname}/{lname}/{album}/{title}/{genre}/{duration}'
+            api_url = f'http://web-api:4000/a/artists/songs/upload/{fname}/{lname}/{album}/{title}/{genre}/0:{duration}'
             
             # Make the POST request to the API
             response = requests.post(api_url)
