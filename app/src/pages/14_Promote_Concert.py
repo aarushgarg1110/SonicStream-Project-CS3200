@@ -13,25 +13,31 @@ from modules.nav import SideBarLinks
 SideBarLinks()
 
 # set the header of the page
-st.header('Promote A Concert')
+st.write(f"### Hi, {st.session_state['firstname']}.")
 
-# You can access the session state to make a more customized/personalized app experience
-st.write(f"### Hi, {st.session_state['username']}.")
-# Create a text input box for the user to enter the mood
-user_input = st.text_input("Enter the mood you are feeling today: ")
+# Create input boxes for the necessary song details
+fname = st.session_state['firstname']
+lname = st.session_state['lastname']
+venue = st.text_input("Enter the venue:")
+date = st.text_input("Enter the date:")
 
-# Check if the user has entered something
-if user_input:
-    # Replace <keyword> in the API URL with the user's input
-    try: 
-        api_url = f'http://web-api:4000/l/listeners/song/{user_input}'
-    except:
-        st.write('could not connect to database to find songs!')
-
-    # Make a GET request to the API
-    response = requests.get(api_url).json()
-        
-    # Display the DataFrame in Streamlit
-    st.dataframe(response, column_order=('title', 'album', 'genre'))
-else:
-    st.write("Please enter a mood.")
+# Add a button to submit the form
+if st.button("Upload Concert"):
+    # Check if all fields are filled
+    if venue and date:
+        try:
+            # Replace with your API URL
+            api_url = f'http://web-api:4000/a/artists/concerts/upload/{fname}/{lname}/{venue}/{date}'
+            
+            # Make the POST request to the API
+            response = requests.post(api_url)
+            
+            # Check the response status
+            if response.status_code == 200:
+                st.success("Concert uploaded successfully!")
+            else:
+                st.error("Failed to upload the concert. Please try again.")
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
+    else:
+        st.error("Please fill in all the fields.")

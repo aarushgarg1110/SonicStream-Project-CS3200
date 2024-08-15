@@ -93,23 +93,30 @@ def get_song_reviews(song):
     return jsonify(theData)
 
 # Promote a concert
-@artists.route('/artists/concerts/upload/<artist>/<venue>/<date>', methods=['POST'])
-def upload_concert(artist, venue, date):
+@artists.route('/artists/concerts/upload/<fname>/<lname>/<venue>/<date>', methods=['POST'])
+def upload_concert(fname, lname, venue, date):
     query_concert = '''
         INSERT INTO concert (venue, event_date)
         VALUES (%s, %s)
     '''
 
+    query_artist_id = '''
+        SELECT id FROM artist WHERE name = %s
+    '''
+
     query_artist_concert = '''
-        INSERT INTO artist_concert (artist_id, song_id)
+        INSERT INTO artist_concert (artist_id, concert_id)
         VALUES (%s, %s)
     '''
 
 
     cursor = db.get_db().cursor()
     cursor.execute(query_concert, (venue, date))
-    song_id = cursor.lastrowid
-    cursor.execute(query_artist_concert, (artist, song_id))
+    concert_id = cursor.lastrowid
+    cursor.execute(query_artist_id, (fname + ' ' + lname))
+    artist_row = cursor.fetchone()
+    artist_id = artist_row['id']
+    cursor.execute(query_artist_concert, (artist_id, concert_id))
     db.get_db().commit()
 
     return 'Success'
