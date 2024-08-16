@@ -33,3 +33,8 @@ if st.button('See what songs you and your friends have in common',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/04_Common_Songs.py')
+
+if st.button('View info about your favorite artists',
+             type = 'primary',
+             use_container_width=True):
+  st.switch_page('pages/05_Followed_Artists.py')

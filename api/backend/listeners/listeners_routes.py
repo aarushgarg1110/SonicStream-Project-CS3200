@@ -148,7 +148,7 @@ def common_songs(username, friend):
     common_songs = cursor.fetchall()
     return jsonify(common_songs)
 
-
+# retreive names of all artists
 @listeners.route('/listeners/seeArtists', methods=['GET'])
 def seeArtists():
     cursor = db.get_db().cursor()
@@ -159,4 +159,72 @@ def seeArtists():
     theData = cursor.fetchall()
     return jsonify(theData)
 
+# get followed artists
+@listeners.route('/listeners/Followedartists/<username>', methods=['GET'])
+def get_followed_artists(username):
+    try:
+        query = '''
+            SELECT a.name
+            FROM artist a
+            INNER JOIN listener_artist la ON a.id = la.artist_id
+            INNER JOIN listener l ON la.listener_id = l.id
+            WHERE l.username = %s;
+        '''
+        
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (username,))
+        artists = cursor.fetchall()
+        
+        if not artists:
+            return jsonify({"message": "No artists found for this user"}), 404
+        
+        return jsonify(artists), 200
 
+    except Exception as e:
+        current_app.logger.error(f"Error retrieving followed artists: {str(e)}")
+        return jsonify({"error": "Internal Server Error"}), 500
+
+# get specified artist's songs
+@listeners.route('/artists/songs/<artistname>', methods=['GET'])
+def get_artist_songs(artistname):
+    try:
+        # Query to get all songs by the artist
+        song_query = '''
+            SELECT s.title
+            FROM song s
+            JOIN artist_song asong ON s.id = asong.song_id
+            JOIN artist a ON asong.artist_id = a.id
+            WHERE a.name = %s;
+        '''
+
+        cursor = db.get_db().cursor()
+
+        # Execute the song query
+        cursor.execute(song_query, (artistname,))
+        songs = cursor.fetchall()
+
+        return jsonify(songs), 200
+    except Exception as e:
+        current_app.logger.error(f"Error retrieving artist details: {str(e)}")
+        return jsonify({"error": "Internal Server Error"}), 500
+
+# find upcoming concerts of specific artist
+@listeners.route('/artists/concerts/<artistname>', methods=['GET'])
+def get_artist_concerts(artistname):
+    try:
+        # Query to get all upcoming concerts for the artist
+        concert_query = '''
+            SELECT c.venue, c.event_date
+            FROM concert c
+            JOIN artist_concert ac ON c.id = ac.concert_id
+            JOIN artist a ON ac.artist_id = a.id
+            WHERE a.name = %s AND c.event_date >= CURDATE();
+        '''
+        cursor = db.get_db().cursor()
+        # Execute the concert query
+        cursor.execute(concert_query, (artistname,))
+        concerts = cursor.fetchall()
+        return jsonify(concerts), 200
+    except Exception as e:
+        current_app.logger.error(f"Error retrieving artist's concerts: {str(e)}")
+        return jsonify({"error": "Internal Server Error"}), 500
