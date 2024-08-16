@@ -31,16 +31,12 @@ except:
     st.write('Could not connect to database to find songs!')
 
 if response:
-    # Convert the response to a DataFrame
-    df = pd.DataFrame(response, columns=['song_title', 'total_playcount'])
-    # Convert string data to numeric values
-    df['total_playcount'] = pd.to_numeric(df['total_playcount'])
-    # Display the data in an interactive table
-    st.dataframe(df, use_container_width=True)
+    # Display the play count data
+    st.dataframe(response, column_order=('song_title', 'total_playcount'))
     
     # Plot the data using Plotly Express
     fig = px.bar(
-        df, 
+        response, 
         x='song_title', 
         y='total_playcount', 
         title='Popular Songs by Playcount', 

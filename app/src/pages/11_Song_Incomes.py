@@ -29,19 +29,12 @@ except:
     st.write('Could not connect to database to find songs!')
 
 if response:
-    # Convert the response to a DataFrame
-    df = pd.DataFrame(response, columns=['song_title', 'revenue_in_$'])
-    # Convert string data to numeric values
-    df['revenue_in_$'] = pd.to_numeric(df['revenue_in_$'])
-    df.index = range(1, len(df) + 1)
-    # df.T.reset_index()
-    
-    # Display the data in an interactive table
-    st.dataframe(df, use_container_width=True)
+    # Display the revenue data
+    st.dataframe(response, column_order=('song_title', 'revenue_in_$'))
 
     # Create a bar chart to visualize the income
     fig = px.bar(
-        df, 
+        response, 
         x='song_title', 
         y='revenue_in_$', 
         title='Income by Song', 
