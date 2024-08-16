@@ -51,5 +51,12 @@ Currently, there are three major components:
 2. In the .env file, type in 'sonic_stream' for the DB_NAME and set any password for MYSQL_ROOT_PASSWORD.
 3. Open a terminal in the project folder you cloned into, in the terminal write 'docker --version' to check you are connected to docker.
 4. then type in 'docker compose up -d' to start/compose the containers
+5. Go to DataGrip, Create a new MySQL data source
+6. In the properties, give it any name
+7. Make username root
+8. Make password the password you set in the .env file
+9. Change port to 3200
+10. Test your connection to see if it succeeds
+11. Press OK
 
  
