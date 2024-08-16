@@ -60,5 +60,6 @@ Currently, there are three major components:
 11. Change port to 3200
 12. Test your connection to see if it succeeds
 13. Press OK
+14. Open up localhost:8501 or run python -m streamlit hello to see our project run
 
  
