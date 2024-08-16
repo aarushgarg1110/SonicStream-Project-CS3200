@@ -3,8 +3,6 @@
 ## Presentation Video
 [Video Presentation](https://drive.google.com/file/d/1y7M5kCStTMEVUlAVC-fExcxfUiLyo4BG/view?usp=sharing)
 
-(If it doesn't open from that, please manually paste ' https://drive.google.com/file/d/1y7M5kCStTMEVUlAVC-fExcxfUiLyo4BG/view?usp=sharing ' into your search browser
-
 ## About
 
 This is a project that utilizes Flask and Streamlit to work with a MySQL database.
