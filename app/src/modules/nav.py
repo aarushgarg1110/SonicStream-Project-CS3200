@@ -59,12 +59,12 @@ def SideBarLinks(show_home=False):
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
 
-        # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
+        # Show Listener buttons if logged in
         if st.session_state['role'] == 'listener':
             ListenerHomeNav()
             # MapDemoNav()
 
-        # If the user role is usaid worker, show the Api Testing page
+        # If the user role is artist, show appropriate buttons
         if st.session_state['role'] == 'artist':
             ArtistHomeNav()
         
