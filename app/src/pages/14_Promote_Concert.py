@@ -45,3 +45,16 @@ if st.button("Upload Concert"):
             st.error(f"An error occurred: {e}")
     else:
         st.error("Please fill in all the fields.")
+    
+st.write(f"Here are all of your upcoming concerts")
+
+try:
+    api_url = f'http://web-api:4000/a/artists/concerts/upcoming/{fname}/{lname}'
+except:
+    st.write('could not connect to database to find songs!')
+
+# Make a GET request to the API
+response = requests.get(api_url).json()
+
+# Display the DataFrame in Streamlit
+st.dataframe(response)
