@@ -17,6 +17,7 @@ def ListenerHomeNav():
     st.sidebar.page_link("pages/02_Follow_Artist.py", label="Follow An Artist", icon='👩‍🎤')
     st.sidebar.page_link("pages/03_Review_Song.py", label="Review A Song", icon='✍️')
     st.sidebar.page_link("pages/04_Common_Songs.py", label="Find Common Songs W/ Friends", icon='🫂')
+    st.sidebar.page_link("pages/05_Followed_Artists.py", label="View Artist info", icon='🎙️')
 
 ## ------------------------ Role of Artist ------------------------
 
