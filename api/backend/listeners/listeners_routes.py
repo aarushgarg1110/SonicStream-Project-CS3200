@@ -90,10 +90,6 @@ def make_review(text, username, song):
         return 'Failed to upload review', 500
 
 
-# edit a review on a song
-
-# delete a review from a song
-
 # retrieve all of [userID, friendID, username, friend_username] for a user
 # code to extract friend username from this is in 04_common_songs
 @listeners.route('/listeners/friends/<username>', methods=['GET'])
