@@ -1,9 +1,9 @@
 # Summer 2024 CS 3200 SuperSonics - SonicStream
 
 ## Presentation Video
-[external.ink](https://drive.google.com/file/d/1y7M5kCStTMEVUlAVC-fExcxfUiLyo4BG/view?usp=sharing)
+[Video Presentation](https://drive.google.com/file/d/1y7M5kCStTMEVUlAVC-fExcxfUiLyo4BG/view?usp=sharing)
 
-(You can't open it by clicking it here, highlight the link manually, and paste it into your search browser)
+(If it doesn't open from that, please manually paste ' https://drive.google.com/file/d/1y7M5kCStTMEVUlAVC-fExcxfUiLyo4BG/view?usp=sharing ' into your search browser
 
 ## About
 
