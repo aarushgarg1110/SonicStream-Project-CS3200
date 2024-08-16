@@ -48,15 +48,17 @@ Currently, there are three major components:
 ## Getting Started for Personal Exploration
 1. Clone the repo to your computer. 
 1. Set up the `.env` file in the `api` folder based on the `.env.template` file.
-2. In the .env file, type in 'sonic_stream' for the DB_NAME and set any password for MYSQL_ROOT_PASSWORD.
-3. Open a terminal in the project folder you cloned into, in the terminal write 'docker --version' to check you are connected to docker.
-4. then type in 'docker compose up -d' to start/compose the containers
-5. Go to DataGrip, Create a new MySQL data source
-6. In the properties, give it any name
-7. Make username root
-8. Make password the password you set in the .env file
-9. Change port to 3200
-10. Test your connection to see if it succeeds
-11. Press OK
+2. Run pip install -r requirements.txt with [https://www.dropbox.com/scl/fi/sdsugwz51bx4135ph2k7y/requirements.txt?rlkey=dqcuzugbt0rp0bs1lafxjrswd&dl=0](url)
+3. Run pip install streamlit
+4. In the .env file, type in 'sonic_stream' for the DB_NAME and set any password for MYSQL_ROOT_PASSWORD.
+5. Open a terminal in the project folder you cloned into, in the terminal write 'docker --version' to check you are connected to docker.
+6. then type in 'docker compose up -d' to start/compose the containers
+7. Go to DataGrip, Create a new MySQL data source
+8. In the properties, give it any name
+9. Make username root
+10. Make password the password you set in the .env file
+11. Change port to 3200
+12. Test your connection to see if it succeeds
+13. Press OK
 
  
