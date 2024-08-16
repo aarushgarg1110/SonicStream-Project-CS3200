@@ -26,7 +26,7 @@ songs = [r['title'] for r in response] # cleans up response a little bit
 # User enters song title and review and submits
 with st.form("Write a Review"):
     song_title = st.selectbox(
-        "Select songs name",
+        "Select song name",
         songs,
         index=None,
         placeholder="Select song...",

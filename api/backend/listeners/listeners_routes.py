@@ -124,8 +124,9 @@ def common_songs(username, friend):
     username = request.view_args['username']
     friend = request.view_args['friend']
 
+    # use DISTINCT in query because if a song has multiple artists, it will duplicate once for each artist
     query = '''
-    SELECT s.title, s.album, a.name
+    SELECT DISTINCT s.title, s.album
     FROM
     (
         SELECT l.id AS userId, lf.id AS friendID

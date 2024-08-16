@@ -24,7 +24,14 @@ lname = st.session_state['lastname']
 album = st.text_input("Enter the album name:")
 title = st.text_input("Enter the song title:")
 genre = st.text_input("Enter the genre:")
-duration = st.text_input("Enter the duration (in time format):")
+# Sliders for duration
+st.write("Enter the duration:")
+hours = st.slider("Hours", 0, 23, 0)
+minutes = st.slider("Minutes", 0, 59, 0)
+seconds = st.slider("Seconds", 0, 59, 0)
+
+# Combine duration into the format needed
+duration = f"{hours}:{minutes}:{seconds}"
 
 # Add a button to submit the form
 if st.button("Upload Song"):
@@ -32,7 +39,7 @@ if st.button("Upload Song"):
     if album and title and genre and duration:
         try:
             # Replace with your API URL
-            api_url = f'http://web-api:4000/a/artists/songs/upload/{fname}/{lname}/{album}/{title}/{genre}/0:{duration}'
+            api_url = f'http://web-api:4000/a/artists/songs/upload/{fname}/{lname}/{album}/{title}/{genre}/{duration}'
             
             # Make the POST request to the API
             response = requests.post(api_url)

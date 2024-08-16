@@ -92,6 +92,23 @@ def get_song_reviews(song):
     theData = cursor.fetchall()
     return jsonify(theData)
 
+# Get upcoming concerts
+@artists.route('/artists/concerts/upcoming/<fname>/<lname>', methods=['GET'])
+def get_upcoming_concerts(fname, lname):
+    fname = request.view_args['fname']
+    lname = request.view_args['lname']
+    cursor = db.get_db().cursor()
+    query = '''
+        SELECT c.venue, c.event_date
+        FROM artist a JOIN artist_concert ac ON a.id = ac.artist_id
+	    JOIN concert c ON ac.concert_id = c.id
+        WHERE a.name = %s and c.event_date >= CURDATE()
+        ORDER BY c.event_date
+    '''
+    cursor.execute(query, (fname + ' ' + lname))
+    theData = cursor.fetchall()
+    return jsonify(theData)
+
 # Promote a concert
 @artists.route('/artists/concerts/upload/<fname>/<lname>/<venue>/<date>', methods=['POST'])
 def upload_concert(fname, lname, venue, date):

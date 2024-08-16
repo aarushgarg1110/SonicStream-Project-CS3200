@@ -18,9 +18,6 @@ def ListenerHomeNav():
     st.sidebar.page_link("pages/03_Review_Song.py", label="Review A Song", icon='✍️')
     st.sidebar.page_link("pages/04_Common_Songs.py", label="Find Common Songs W/ Friends", icon='🫂')
 
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demo", icon='🗺️')
-
 ## ------------------------ Role of Artist ------------------------
 
 def ArtistHomeNav():
