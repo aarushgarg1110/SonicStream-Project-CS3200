@@ -57,7 +57,7 @@ def top_ten_artists(days):
 def seeMoney():
     cursor = db.get_db().cursor()
     query = '''
-    SELECT s.title, a.name, r.company_revenue
+    SELECT DISTINCT s.title, r.company_revenue, s.id
     FROM song s JOIN revenue r ON s.revenue_id = r.id
     JOIN artist_song asg ON asg.song_id = s.id
     JOIN artist a ON a.id = asg.artist_id
